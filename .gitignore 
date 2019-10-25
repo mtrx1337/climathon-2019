@@ -1,0 +1,5 @@
+*.csv
+*.json
+*.vim
+*.vscode
+*.pycharm
