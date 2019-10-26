@@ -17,7 +17,7 @@ function insertStreetListData(data) {
             newChild.firstElementChild.innerHTML
             .replace("%%item-heading%%", street["street-name"])
             .replace("%%item-ranking%%", index)
-            //.replace("%%item-desc%%", street["description"])
+            .replace("%%co2%%", street['co2'].toFixed(2))
             .replace("%%img-url1%%", street["image1"])
             .replace("%%img-url2%%", street["image2"])
             .replace("%%img-url3%%", street["image3"]);
@@ -55,10 +55,12 @@ function serializeData (data) {
         if (image2 != undefined) { image2 = image2['src'] } else { image2 = stockphoto };
         if (image3 != undefined) { image3 = image3['src'] } else { image3 = stockphoto };
 
+        let co2 = (details['daily_traffic'] * 0.2 * details['length'] * 0.001 * 365) * 0.9 * 0.001;
+
         let streetObj = {
                 "street-name": streetName,
                 "index": index,
-                //"description":
+                "co2": co2,
                 "image1": image1,
                 "image2": image2,
                 "image3": image3,
