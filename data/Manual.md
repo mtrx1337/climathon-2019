@@ -54,8 +54,6 @@ bbox parameter set
 3    15.039889335632324
 name    "Germany"
 
-Api-Call für Live-Störungen - Date format hat drei Nachkommastellen
-http://dev.virtualearth.net/REST/v1/Traffic/Incidents/47.27577590942383,5.865616798400879,55.06619644165039,15.039889335632324?key=Ar8Q_ePXZ6LP-1raRsINPv3uEAcZeWFi28VGRCsFsuSz6LLVTfXrxPspFPWdKpNc
-
+#### Api-Call für Live-Störungen - Date format hat drei Nachkommastellen
 https://dev.virtualearth.net/REST/v1/Traffic/Incidents/52.308479,12.974854,52.716331,13.908691?key=Ar8Q_ePXZ6LP-1raRsINPv3uEAcZeWFi28VGRCsFsuSz6LLVTfXrxPspFPWdKpNc 
 
