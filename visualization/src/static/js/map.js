@@ -26,14 +26,14 @@ function redraw() {
     const layers = [
         new GeoJsonLayer({
             id: 'geojson',
-            data: '/static/geodata/bezirksgrenzen.geojson', // TODO switch out for actual data
+            data: '/static/geodata/highest_traffic.geojson',
             opacity: 0.8,
             stroked: true,
-            filled: true,
+            filled: false,
             extruded: false,
             wireframe: true,
-            getLineColor: getLineColor,
-            getLineWidth: 3,
+            getLineWidth: 40,
+            getLineColor: [200, 0, 0],
         }),
     ];
 

@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: #444;
+    color: white;
 }
 
 #page-flex-box {
@@ -9,15 +10,15 @@ body {
 }
 
 #first-container {
-    flex: 0.4;
-}
-
-#second-container {
     flex: 0.6;
 }
 
+#second-container {
+    flex: 0.4;
+}
+
 #list-container {
-    margin: 50px;
+    margin: 30px;
 }
 
 #street-list-item-container {
@@ -48,7 +49,7 @@ body {
 }
 
 .item-heading {
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 .item-desc {
@@ -57,20 +58,18 @@ body {
 }
 
 .item-ranking {
-    font-size: 2em;
+    font-size: 1.8em;
     margin-left: auto;
 }
 
 .item-img {
-    width: 90%;
-    height: 400px;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
 }
 
 #map {
-    width: 40%;
+    width: 60%;
     height: 100vh;
     display: block;
     position: fixed;
