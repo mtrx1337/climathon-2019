@@ -40,6 +40,8 @@ curl -H "Authorization: Bearer 52dbc8acb099dcf02a37a9583501000c” https://api.d
 ### Uber
 https://www.npmjs.com/package/movement-data-toolkit
 
+$ mdt speeds-to-geojson berlin 2019-03-01 2019-06-30 > uber_2019-03-06.geojson
+
 https://movement.uber.com/explore/berlin/speeds/query?lat.=52.519171&lng.=13.3884101&z.=13&lang=en-US&dt[tpb]=ALL_DAY&dt[wd;]=1,2,3,4,5,6,7&dt[dr][sd]=2019-06-01&dt[dr][ed]=2019-06-30&ff=
 
 
