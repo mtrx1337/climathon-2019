@@ -5,3 +5,4 @@
 *.pycharm
 __pycache__/*
 venv
+*.png
