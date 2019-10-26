@@ -24,7 +24,7 @@ Some problems with their API, not GeoJSON conform API
 
 https://fixmyberlin.de/api
 
-### CycleHack Berlin - 11.13.2019
+### CycleHack Berlin - 11.-13.10.2019
 
 https://cyclehackberlin.de/
 
