@@ -31,3 +31,7 @@ https://cyclehackberlin.de/
 Two day Hackathon about Cycling in Berlin, organized by MotionLab, Velo Berlin, Berliner Senat komoot und anderen
 
 Media coverage: https://www.radioeins.de/programm/sendungen/der_schoene_morgen/rad/cyclehack-berlin.html
+
+### Radmesser - Tagesspiegel
+
+https://github.com/tagesspiegel/radmesser/tree/master/opendata
