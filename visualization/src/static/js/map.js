@@ -26,7 +26,7 @@ function redraw() {
     const layers = [
         new GeoJsonLayer({
             id: 'geojson',
-            data: '/static/geodata/highest_traffic.geojson',
+            data: '/static/geodata/final_full.geojson',
             opacity: 0.8,
             stroked: true,
             filled: false,

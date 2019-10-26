@@ -71,7 +71,7 @@ function serializeData (data) {
     return streetListUnsorted
 }
 
-let url = "/static/geodata/lichtenberg.geojson";
+let url = "/static/geodata/final_full.geojson";
 fetch(url)
     .then(res => res.json())
     .then((out) => {
