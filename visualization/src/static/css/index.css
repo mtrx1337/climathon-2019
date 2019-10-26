@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+
+#page-flex-box {
+    display: flex;
+}
+
+#first-container {
+    flex: 0.4;
+}
+
+#second-container {
+    flex: 0.6;
+}
+
+#list-container {
+    margin: 50px;
+}
+
+#street-list-item-container {
+    padding-bottom: 80px;
+}
+
+#toolbar {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 40px;
+}
+
+#sort-button {
+    background-color: #8a8;
+    align-self: flex-start;
+}
+
+#district-filter-button {
+    background-color: #a88;
+    align-self: flex-end;
+}
+
+.heading-container {
+    width: 90%;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+}
+
+.item-heading {
+    font-size: 2.5em;
+}
+
+.item-desc {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.item-ranking {
+    font-size: 2em;
+    margin-left: auto;
+}
+
+.item-img {
+    width: 90%;
+    height: 400px;
+    padding-left: 5%;
+    padding-right: 5%;
+    object-fit: cover;
+}
+
+#map {
+    width: 40%;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    -webkit-box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+    -moz-box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+    box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+}

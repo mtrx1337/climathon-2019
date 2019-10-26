@@ -1,26 +1,55 @@
 "usestrict";
 
+function initMap () {
+    /*
+    let map = L.map('map-id').setView([52.5168627,13.4059852], 13);
+    let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    let osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+    let osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+    map.addLayer(osm);
+    */
+}
+
 function insertStreetListData(data) {
     let listItemTemplate = document.getElementById("list-item-template").content.childNodes[1].cloneNode(true);
     let streetList = document.getElementById("street-list");
 
+    // init list of streets to sort by index value
+    streetListUnsorted = [];
+    function sortStreets(a, b) {
+        return a.index - b.index;
+    };
+
     for (street of data) {
         let newChild = listItemTemplate.cloneNode(true);
+        let index = calculateIndex(street);
         let inner =
             newChild.firstElementChild.innerHTML
             .replace("%%item-heading%%", street["street-name"])
-            .replace("%%item-ranking%%", calculateIndex(street))
+            .replace("%%item-ranking%%", index)
             .replace("%%item-desc%%", street["description"])
             .replace("%%img-url%%", street["img-url"]);
         newChild.innerHTML = inner;
-        streetList.appendChild(newChild);
+        streetListUnsorted.push(
+            {
+                newChild,
+                index
+            }
+        );
+    }
+
+    let streetListSorted = streetListUnsorted.sort(sortStreets);
+
+    for (street of streetListSorted) {
+        streetList.appendChild(street.newChild);
     }
 }
 
+
 function calculateIndex (data) {
     let indexObj = data["index"];
-    let index = (indexObj["pollution"] * indexObj["jamming"] * indexObj["accidents"]) / data.length;
-    return index;
+    let index = (indexObj["pollution"] * indexObj["jamming"] * indexObj["accidents"]) / Object.keys(indexObj).length;
+    return index.toFixed(2);
 }
 
 data = [
@@ -113,3 +142,4 @@ data = [
 ]
 
 insertStreetListData(data);
+initMap();
