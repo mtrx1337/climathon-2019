@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lorem Ipsum</title>
+        <link rel="stylesheet" href="/static/css/skeleton/skeleton.css">
+        <link rel="stylesheet" href="/static/css/index.css">
+        <script src="/static/js/index.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="page-flex-box">
+            <div id="first-container">
+                <div id="osm-container"></div>
+            </div>
+            <div id="second-container">
+                <div id="list-container">
+                    <div id="toolbar">
+                        <!-- filter menu -->
+                        <!-- sort drop down -->
+                    </div>
+                    <ul id="street-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <template id="list-item-template">
+            <div id="list-item-container">
+                <li id="list-item">
+                    <div class="heading-container">
+                        <h1 class="item-heading"> %%item-heading%% </h1>
+                        <h2 class="item-ranking"> %%item-ranking%% </h2>
+                    </div>
+                    <p class="item-desc"> %%item-desc%% </p>
+                    <img class="item-img" src="%%img-url%%" alt="">
+                </li>
+            </div>
+        </template>
+
+    </body>
+</html>
