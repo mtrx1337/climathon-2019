@@ -4,112 +4,77 @@ function insertStreetListData(data) {
     let listItemTemplate = document.getElementById("list-item-template").content.childNodes[1].cloneNode(true);
     let streetList = document.getElementById("street-list");
 
+    // init list of streets to sort by index value
+    streetListUnsorted = [];
+    function sortStreets(a, b) {
+        return a.index - b.index;
+    };
+
     for (street of data) {
         let newChild = listItemTemplate.cloneNode(true);
+        let index = street['index'];
         let inner =
             newChild.firstElementChild.innerHTML
             .replace("%%item-heading%%", street["street-name"])
-            .replace("%%item-ranking%%", calculateIndex(street))
-            .replace("%%item-desc%%", street["description"])
-            .replace("%%img-url%%", street["img-url"]);
+            .replace("%%item-ranking%%", index)
+            .replace("%%co2%%", street['co2'].toFixed(2))
+            .replace("%%img-url1%%", street["image1"])
+            .replace("%%img-url2%%", street["image2"])
+            .replace("%%img-url3%%", street["image3"]);
         newChild.innerHTML = inner;
-        streetList.appendChild(newChild);
+        streetListUnsorted.push(
+            {
+                newChild,
+                index
+            }
+        );
+    }
+
+    let streetListSorted = streetListUnsorted.sort(sortStreets);
+
+    for (street of streetListSorted) {
+        streetList.appendChild(street.newChild);
     }
 }
 
-function calculateIndex (data) {
-    let indexObj = data["index"];
-    let index = (indexObj["pollution"] * indexObj["jamming"] * indexObj["accidents"]) / data.length;
-    return index;
+function serializeData (data) {
+    let streetListUnsorted = [];
+    for (street of data) {
+        let details = JSON.parse(street['properties']['details'])[0];
+
+        let streetName = street['properties']['name'];
+        let index = street['properties']['happy_bike_index'];
+        //let speedLimit = details['speed_limit'];
+        let image1 = details['photos'][0];
+        let image2 = details['photos'][1];
+        let image3 = details['photos'][2];
+
+        let stockphoto = "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F3.bp.blogspot.com%2F-p3YnCoUnFeQ%2FUaW_c7vRO2I%2FAAAAAAAAA0E%2FSw3_wo-Tv_E%2Fs1600%2FDSC02166.JPG&f=1&nofb=1"
+
+        if (image1 != undefined) { image1 = image1['src'] } else { image1 = stockphoto };
+        if (image2 != undefined) { image2 = image2['src'] } else { image2 = stockphoto };
+        if (image3 != undefined) { image3 = image3['src'] } else { image3 = stockphoto };
+
+        let co2 = (details['daily_traffic'] * 0.2 * details['length'] * 0.001 * 365) * 0.9 * 0.001;
+
+        let streetObj = {
+                "street-name": streetName,
+                "index": index,
+                "co2": co2,
+                "image1": image1,
+                "image2": image2,
+                "image3": image3,
+        };
+
+        streetListUnsorted.push(streetObj);
+    }
+    return streetListUnsorted
 }
 
-data = [
-    {
-        "street-name" : "muster straße",
-        "description" : "quam reiciendis sed similique occaecati accusantium quo. Ut quibusdam quia cum et. Molestias et et autem.",
-        "index" : {
-            "pollution" : 1.5,
-            "jamming" : 1.3,
-            "accidents" : 2.5,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-    {
-        "street-name" : "random straße",
-        "description" : "similique quaerat vero nihil aut dignissimos voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita veniam sed aut",
-        "index" : {
-            "pollution" : 1.3,
-            "jamming" : 2.3,
-            "accidents" : 1.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-
-    {
-        "street-name" : "ping pong straße",
-        "description" : "nihil aut dignissimos voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita veniam sed aut",
-        "index" : {
-            "pollution" : 2.1,
-            "jamming" : 4.1,
-            "accidents" : 0.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-
-    },
-
-    {
-        "street-name" : "ping pong straße",
-        "description" : "voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita aut",
-        "index" : {
-            "pollution" : 1.9,
-            "jamming" : 1.4,
-            "accidents" : 0.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-
-    {
-        "street-name" : "abc straße",
-        "description" : "quam reiciendis sed similique occaecati accusantium quo. Ut quibusdam quia cum et. Molestias et et autem.",
-        "index" : {
-            "pollution" : 1.5,
-            "jamming" : 1.3,
-            "accidents" : 2.5,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-    {
-        "street-name" : "xyz straße",
-        "description" : "similique quaerat vero nihil aut dignissimos voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita veniam sed aut",
-        "index" : {
-            "pollution" : 1.3,
-            "jamming" : 2.3,
-            "accidents" : 1.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-
-    {
-        "street-name" : "asdfqwer straße",
-        "description" : "nihil aut dignissimos voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita veniam sed aut",
-        "index" : {
-            "pollution" : 2.1,
-            "jamming" : 4.1,
-            "accidents" : 0.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-
-    {
-        "street-name" : "ping pong straße",
-        "description" : "voluptatem. Laboriosam officiis magni voluptas cumque blanditiis repellendus. Rem laborum dignissimos velit. Iure quia quisquam expedita aut",
-        "index" : {
-            "pollution" : 1.9,
-            "jamming" : 1.4,
-            "accidents" : 0.8,
-        },
-        "img-url" : "http://localhost:5000/static/img/test.png",
-    },
-]
-
-insertStreetListData(data);
+let url = "/static/geodata/lichtenberg.geojson";
+fetch(url)
+    .then(res => res.json())
+    .then((out) => {
+        let data = serializeData(out['features']);
+        insertStreetListData(data);
+    });

@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #444;
+    color: white;
+}
+
+#page-flex-box {
+    display: flex;
+}
+
+#first-container {
+    flex: 0.6;
+}
+
+#second-container {
+    flex: 0.4;
+}
+
+#list-container {
+    margin: 30px;
+}
+
+#street-list-item-container {
+    padding-bottom: 80px;
+}
+
+#toolbar {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 40px;
+}
+
+#sort-button {
+    background-color: #8a8;
+    align-self: flex-start;
+}
+
+#district-filter-button {
+    background-color: #a88;
+    align-self: flex-end;
+}
+
+.heading-container {
+    width: 90%;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+}
+
+.item-heading {
+    font-size: 2em;
+}
+
+.item-desc {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.item-ranking {
+    color: #eaa;
+    font-size: 1.8em;
+    margin-left: auto;
+}
+
+.item-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#map {
+    width: 60%;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    -webkit-box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+    -moz-box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+    box-shadow: 4px 0px 18px 0px rgba(0,0,0,0.57);
+}
