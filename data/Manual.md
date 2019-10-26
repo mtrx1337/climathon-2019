@@ -43,7 +43,7 @@ https://www.npmjs.com/package/movement-data-toolkit
 https://movement.uber.com/explore/berlin/speeds/query?lat.=52.519171&lng.=13.3884101&z.=13&lang=en-US&dt[tpb]=ALL_DAY&dt[wd;]=1,2,3,4,5,6,7&dt[dr][sd]=2019-06-01&dt[dr][ed]=2019-06-30&ff=
 
 
-Bing Maps
+### Bing Maps
 API-Key: Ar8Q_ePXZ6LP-1raRsINPv3uEAcZeWFi28VGRCsFsuSz6LLVTfXrxPspFPWdKpNc
 http://dev.virtualearth.net/REST/v1/Traffic/Incidents/37,-105,45,-94?key=Ar8Q_ePXZ6LP-1raRsINPv3uEAcZeWFi28VGRCsFsuSz6LLVTfXrxPspFPWdKpNc 
 
