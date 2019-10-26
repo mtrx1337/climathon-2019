@@ -3,3 +3,5 @@
 *.vim
 *.vscode
 *.pycharm
+__pycache__/*
+venv
