@@ -1,0 +1,7 @@
+*.RData
+.Rproj.user
+archived
+geodata
+outputs
+.Rhistory
+fixmygeojson.*

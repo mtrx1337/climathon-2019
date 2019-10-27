@@ -1,0 +1,22 @@
+---
+title: "Close the Gap #6: Local Demo of Full Spectrum in RStudio"
+output: html_notebook
+---
+
+## Import Layers
+
+```{r}
+load(file = "outputs/final_full_base.RData")
+load(file = "outputs/final_full_index.RData")
+```
+
+```{r eval=FALSE}
+mapdeck(style = mapdeck_style("dark"), zoom = 0) %>% 
+  add_sf(data = close_gapbase, stroke_colour = "happy_bike_index",
+         palette = "inferno", stroke_width = 100, layer_id = "base") %>%
+  add_sf(data = close_gapindex, stroke_colour = "index",
+         palette = "magma", stroke_width = 50, layer_id = "index") 
+```
+
+![](img/unhappy_3_w_index_preview.jpg)
+

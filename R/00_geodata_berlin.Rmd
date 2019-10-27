@@ -1,0 +1,36 @@
+---
+title: "Close the Gap #0: Geodata - Berlin Base"
+output: html_notebook
+---
+
+## Load the packages
+
+```{r}
+source("000_setup.R")
+```
+
+## Berlin
+
+> TODO: From City Lab Berlin
+
+```{r}
+berlin_sf <- geojsonsf::geojson_sf("geodata/bezirksgrenzen.geojson") %>% st_union()
+berlin_bezirke_sf <- geojsonsf::geojson_sf("geodata/bezirksgrenzen.geojson")
+berlin_strassen_sf <- geojsonsf::geojson_sf("geodata/Detailnetz-Strassenabschnitte.geojson")
+```
+
+> 45K Streets; maybe caution on low-RAM systems
+
+```{r fig.width=10, fig.height=8}
+ggplot() +
+  geom_sf(data = berlin_strassen_sf, fill = NA) +
+  geom_sf(data = berlin_bezirke_sf, fill = NA, color = "red") +
+  geom_sf(data = berlin_strassen_sf, color = "lightgrey", size = 0.1) +
+  theme_void()
+```
+
+
+```{r}
+sessionInfo()
+```
+
