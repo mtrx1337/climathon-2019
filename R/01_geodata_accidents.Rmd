@@ -1,0 +1,43 @@
+---
+title: "Close the Gap #1: Geodata - Accidents"
+output: html_notebook
+---
+
+> Accidents involving Cyclists
+
+> TODO: Source - Tagesspiegel / Berliner Polizei
+
+## Load the packages
+
+```{r}
+source("00_setup.R")
+```
+
+## load the Data
+
+```{r}
+unfaelle <- jsonlite::fromJSON("geodata/unfaelle_geo.json", flatten = TRUE) # %>% unnest()
+
+unfaelle <- unfaelle$features %>% st_as_sf(crs = 4326, coords = c("coordinates.lat", "coordinates.lon"))
+```
+
+## Calculate Buffer
+
+```{r}
+unfaelle_buffer <- unfaelle %>% 
+  st_transform(crs = 3857) %>%
+  st_buffer(dist = 25) %>% 
+  st_transform(crs = 4326) %>% 
+  st_union()
+```
+
+## Preview
+
+```{r fig.width=10}
+ggplot() +
+  geom_sf(data = berlin_sf) +
+  geom_sf(data = berlin_bezirke_sf, fill = "lightgrey") +
+  geom_sf(data = unfaelle_buffer, color = "red", alpha = 0.5) +
+  theme_void()
+```
+

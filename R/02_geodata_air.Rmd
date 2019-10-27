@@ -1,0 +1,60 @@
+---
+title: "Close the Gap #2: Geodata - Air Quality Data"
+output: html_notebook
+---
+
+> TODO: Source - http://api.luftdaten.info/static/v2/data.24h.json
+
+## Load and Subset to Germany
+
+```{r}
+luftdaten <- jsonlite::fromJSON("geodata/data.24h.json", flatten = TRUE) # %>% unnest()
+luftdaten_de <- luftdaten %>%
+  filter(location.country == "DE") %>%
+  sf::st_as_sf(crs = 4326, coords = c('location.longitude', 'location.latitude'))
+```
+
+> TODO: Unnest details list-column
+
+## Subset (st_within) to Berlin
+
+```{r}
+luftdaten_berlin <- luftdaten_de %>% 
+  filter(lengths(st_within(., berlin_sf)) > 0)
+```
+
+## Calculate Buffer
+
+```{r}
+luftdaten_berlin_buffer <- luftdaten_berlin %>% 
+  st_transform(crs = 3857) %>%
+  st_buffer(dist = 1000) %>% 
+  st_transform(crs = 4326) %>% 
+  st_union()
+```
+
+## Preview
+
+```{r fig.width=10}
+ggplot() +
+  geom_sf(data = berlin_sf) +
+  geom_sf(data = berlin_bezirke_sf, fill = "lightgrey") +
+  geom_sf(data = luftdaten_berlin_buffer, fill = "red", alpha = 0.3) +
+  theme_void()
+```
+
+## Air + Accidents
+
+```{r fig.width=10}
+ggplot() +
+  geom_sf(data = berlin_sf) +
+  geom_sf(data = berlin_bezirke_sf, fill = "lightgrey") +
+  geom_sf(data = unfaelle_buffer, color = "red", alpha = 0.5) +
+  geom_sf(data = luftdaten_berlin_buffer, fill = "blue", alpha = 0.5) +
+  theme_void()
+```
+
+```{r eval=FALSE}
+save(luftdaten_berlin_buffer, file = "outputs/luftdaten_berlin_buffer.RData")
+```
+
