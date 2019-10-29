@@ -24,10 +24,12 @@ We all had incredibly much fun working through this for 24 hours. It's amazing h
 
 ## Thanks to:
 
-Marc and Manuel for keeping the team on track and reminding us to recap our thoughts and doings. Management was very important for us all to keep going in the same direction.
+Marc and Manuel for keeping the team on track, reminding us to recap our thoughts and doings, and successfully (!) pitching our concept. Management was very important for us all to keep going in the same direction.
 
-Ilja, Kathi and Carl for making the huge datasets accessable and easy to work with.
+Ilja, Kathi and Carl for making the huge datasets accessible and easy to work with.
 
-Kai for getting the AWS mining server running even though it crashed on us a few times.
+Kai for non-stop mining geojsons, exploring and documenting APIs, and setting up and operating an AWS instance.
 
-And Ann-Kathrin who kept us from starving when we zoned out, for the cool logo she made and supporting us.
+Leo for engineering the web app, and speed-learning deck.gl after after last-minute specs changes.
+
+And Ann-Kathrin who kept us from starving when we zoned out, for the cool logo she made, and boosting our morale.

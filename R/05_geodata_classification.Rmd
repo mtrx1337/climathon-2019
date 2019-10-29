@@ -1,0 +1,117 @@
+---
+title: "Close the Gap #5: Geodata - Classification"
+output: html_notebook
+---
+
+> TODO: Sources - FixMyBerlin, Uber, Luftdaten.info, CityLab
+
+## Classification of Segements
+
+> Index levels for demo
+  
+  + accident: 3
+  + air quality: 2
+  + traffic probe: 1
+
+### Intersect with Accident Data
+
+> if intersection -> assign severity level 3, else 0
+
+```{r eval=FALSE, include=FALSE, echo=FALSE}
+load(file ="outputs/data_close_gap_raw.RData")
+```
+
+```{r}
+close_gap <- close_gap %>% 
+  mutate(accident = ifelse(lengths(st_intersects(geometry, unfaelle_buffer)) >= 1, 3, 0 )) %>% 
+  select(accident, everything())
+```
+
+### Intersect with Air Quality Data
+
+> if intersection -> assign severity level 2, else 0
+
+```{r}
+close_gap <- close_gap %>% 
+  mutate(airquality = ifelse(lengths(st_intersects(geometry, luftdaten_berlin_buffer)) >= 1, 2, 0 )) %>%
+  select(airquality, everything())
+```
+
+
+### Spatial (Left) Join with Uber Data
+
+> if intersection -> assign severity level 1, else 0
+
+> for production, unionize neighbouring Uber segements
+
+```{r}
+close_gap <- close_gap %>% 
+  st_join(y = uber_06_berlin, left = TRUE) %>% 
+  mutate(probe = ifelse(speed_mean_kph < 15, 1, 0)) 
+```
+
+### Calculate Segment Index
+
+> Demo Formula
+
+```{r}
+close_gap <- close_gap %>% 
+  mutate(index = (accident + airquality + probe) * 1) %>% 
+  select(index, everything())
+```
+
+## Final Geojson for Demo
+
+> reducing subset to relieve frontend for demo
+
+```{r}
+close_gap <- close_gap %>% filter(happy_bike_index < 3)
+# save(close_gapbase, file = "outputs/final_full.RData")
+```
+
+> subsetting into HappyBike Layer & Index Layer
+
+```{r}
+close_gapbase <- close_gap %>% filter(is.na(index))
+# save(close_gapbase, file = "outputs/final_full_base.RData")
+```
+
+```{r}
+close_gapindex <- close_gap %>% filter(!is.na(index))
+# save(close_gapbase, file = "outputs/final_full_index.RData")
+```
+
+## Short Analysis: Length of Bad Lanes
+
+> UNVETTED / NOT DOUBLE-CHECKED; Just to demonstrate feasibility
+
+> (Un)HappyBike Segments (in km) (for Level < 4)
+
+```{r}
+close_gapbase %>% 
+  summarise(n = n(), total_length_base_km = sum(length_m)/1000,
+            avg_length_km = total_length_base_km/n)
+```
+
+> Index Segments (in km) (for Level < 4)
+
+```{r}
+close_gapindex %>% 
+  summarise(n = n(), total_length_index_km = sum(length_m)/1000,
+            avg_length_km = total_length_index_km/n)
+```
+
+## Geojson Files for Demo
+
+> base layer
+
+```{r}
+geojsonio::geojson_write(close_gapbase, file = "outputs/final_full_base.geojson", encoding = "UTF-8")
+```
+
+> index layer
+
+```{r}
+geojsonio::geojson_write(close_gapindex, file = "outputs/final_full_index.geojson", encoding = "UTF-8")
+```
+
