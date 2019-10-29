@@ -1,6 +1,6 @@
-# Climathon 2019 - Team "Close the Gap"
+<img align="right" width="150" height="150" src="./logo.png">
 
-<center> !["Close the Gap" logo](./logo.png) </center>
+# Climathon 2019 - Team "Close the Gap"
 
 A collection of all the things we've worked on, the data we mined and the software we created.
 
