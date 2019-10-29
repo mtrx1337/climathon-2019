@@ -1,5 +1,7 @@
 # Climathon 2019 - Team "Close the Gap"
 
+<center> !["Close the Gap" logo](./logo.png) </center>
+
 A collection of all the things we've worked on, the data we mined and the software we created.
 
 ## What's the plan?
