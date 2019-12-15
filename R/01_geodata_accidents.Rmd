@@ -10,24 +10,29 @@ output: html_notebook
 ## Load the packages
 
 ```{r}
-source("00_setup.R")
+source("000_setup.R")
 ```
 
 ## load the Data
 
 ```{r}
-unfaelle <- jsonlite::fromJSON("geodata/unfaelle_geo.json", flatten = TRUE) # %>% unnest()
+unfaelle <- jsonlite::fromJSON("geodata/unfaelle_geo.json", flatten = TRUE)
 
-unfaelle <- unfaelle$features %>% st_as_sf(crs = 4326, coords = c("coordinates.lat", "coordinates.lon"))
+unfaelle <- unfaelle$features %>% 
+  sf::st_as_sf(crs = 4326,
+           coords = c("coordinates.lat",
+                      "coordinates.lon"))
+class(unfaelle)
 ```
 
 ## Calculate Buffer
 
 ```{r}
 unfaelle_buffer <- unfaelle %>% 
-  st_transform(crs = 3857) %>%
-  st_buffer(dist = 25) %>% 
-  st_transform(crs = 4326) %>% 
+  st_transform(crs = 3857) %>% # pseudo-mercator | to metric
+  st_buffer(dist = 25) %>% # radius in meters
+  st_transform(crs = 4326) %>% # back to WGS84 | lat°/lon°
+  # TODO: count co-occurnces
   st_union()
 ```
 

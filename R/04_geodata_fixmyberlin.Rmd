@@ -11,17 +11,18 @@ output: html_notebook
 
 ```{r}
 close_gap <- sf::read_sf("geodata/fixmyberlin_final_7.geojson")
+
 close_gap <- close_gap %>%
   filter(happy_bike_index < 5) %>%
   st_transform(crs = 3857) %>%
-  mutate(length_m = as.integer(st_length(st_geometry(.)))) %>% 
+  mutate(length_m = as.integer(sf::st_length(st_geometry(.)))) %>% 
   st_transform(crs = 4326)
   
 # save(close_gap, file ="outputs/data_close_gap_raw.RData")
 ```
 
 ```{r eval=FALSE, include=FALSE, echo=FALSE}
-load(file ="outputs/data_close_gap_raw.RData")
+load(file ="outputs/data_close_gap_raw.RData") # returns close_gap
 ```
 
 ### Inspect Data
@@ -51,7 +52,14 @@ close_gap %>%
   names()
 ```
 
+> Toy subset
+
 ### Worst 10 Lichtenberg Sample for Testing
+
+```{r}
+close_gap %>% 
+  mapview::mapview()
+```
 
 ```{r}
 close_gap_10 <- close_gap %>% 

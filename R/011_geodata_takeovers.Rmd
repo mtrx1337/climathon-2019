@@ -1,0 +1,93 @@
+---
+title: "Close the Gap #99: Backlog - Take Overs"
+output: html_notebook
+---
+
+> https://github.com/tagesspiegel/radmesser
+
+> Legal distance vor takeovers: 1.5 to 2 meters (depending on vehicle speed)
+
+```{r}
+takeovers_roads_raw <- geojsonsf::geojson_sf("https://raw.githubusercontent.com/tagesspiegel/radmesser/master/opendata/detailnetz_ueberholvorgaenge.geo.json")
+```
+
+```{r}
+takeovers_roads_raw %>% skimr::skim()
+```
+
+```{r}
+tmpfile <- tempfile()
+
+download.file(destfile = tmpfile, "https://raw.githubusercontent.com/tagesspiegel/radmesser/master/opendata/ueberholvorgaenge.csv")
+
+takeovers_csv <- read_csv(tmpfile)
+```
+
+```{r}
+skimr::skim(takeovers_csv)
+```
+
+```{r}
+takeovers_raw <- left_join(takeovers_csv, takeovers_roads_raw, by = c("STRSCHL"))
+class(takeovers_raw) # not yet sf
+```
+
+> do not run
+
+```{r eval=FALSE}
+visdat::vis_dat(takeovers_raw, warn_large_data = FALSE)
+```
+
+```{r}
+class(takeovers_raw)
+```
+
+```{r}
+takeovers_sf <- takeovers_raw %>% st_as_sf()
+class(takeovers_sf)
+# save(takeovers_sf, file = "geodata/takeovers_sf.RData")
+```
+```{r}
+load("geodata/takeovers_sf.RData")
+```
+
+```{r}
+skimr::skim(takeovers_sf)
+```
+
+
+
+```{r}
+takeovers_sf %>% 
+  filter(dist_left <= 50) %>% 
+  mapdeck(style = mapdeck_style("dark"), zoom = 0) %>% 
+  add_sf(stroke_colour = "dist_left",
+         palette = "heat", stroke_width = 20)
+```
+
+```{r}
+takeovers_sf_75 <- takeovers_sf %>% 
+  filter(dist_left < 75)
+
+takeovers_sf_75$STRSCHL %>% 
+  n_distinct()
+```
+
+```{r eval=FALSE}
+close_gap_v2 <- close_gap %>% 
+  st_join(y = takeovers_sf_75, left = TRUE) %>% 
+  mutate(takeover_danger = ifelse(dist_left < 75, 1, 0))  %>% 
+  mutate(index = ((accident + airquality + probe + takeover_danger) * -1)) %>% 
+  select(index, everything())
+```
+
+```{r eval=FALSE}
+close_gap_v2 %>% filter(!is.na(takeover_danger)) %>% 
+  mapview::mapview(zcol = "dist_left")
+```
+
+```{r eval=FALSE}
+close_gap_v2 %>% filter(!is.na(takeover_danger)) %>% 
+  count()
+```
+

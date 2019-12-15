@@ -7,22 +7,30 @@ output: html_notebook
 
 ## Load
 
-```{r}
-uber_06 <- geojson_sf("geodata/uber_201904-06_speed.json")
+```{r eval=FALSE}
+uber_06 <- geojsonsf::geojson_sf("geodata/uber_201904-06_speed.json")
+summary(uber_06)
 ```
+
+> 30 min runtime vs 12 min runtime
 
 ```{r eval=FALSE}
 uber_06_berlin <- uber_06 %>% 
     sf::st_crop(berlin_sf) %>% 
-  sf::st_intersection(berlin_sf)
+  # sf::st_intersection(berlin_sf)
+    filter(lengths(st_within(., berlin_sf)) > 0) # alt approach
 # save(file = "outputs/uber_06_berlin.RData", uber_06_berlin)
 ```
 
-```{r eval=FALSE, echo=FALSE, include=FALSE}
+```{r echo=FALSE, include=FALSE}
 load(file = "outputs/uber_06_berlin.RData")
 ```
 
 ## Inspect
+
+```{r}
+summary(uber_06_berlin)
+```
 
 ```{r}
 skimr::skim(uber_06_berlin)
@@ -43,6 +51,8 @@ add_sf(map = mapdeckmap, data = uber_06_berlin,
 ![](img/uber_preview.jpg)
 
 ```{r eval=FALSE}
-geojsonio::geojson_write(uber_06_berlin, file = "outputs/export_test_uber.geojson", encoding = "UTF-8")
+geojsonio::geojson_write(uber_06_berlin, 
+                         file = "outputs/export_test_uber.geojson",
+                         encoding = "UTF-8") # damn important
 ```
 

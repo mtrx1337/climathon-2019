@@ -1761,12 +1761,12 @@ load(file = &quot;outputs/final_full_index.RData&quot;)</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIm1hcGRlY2soc3R5bGUgPSBtYXBkZWNrX3N0eWxlKFwiZGFya1wiKSwgem9vbSA9IDApICU+JSAiLCIgIGFkZF9zZihkYXRhID0gY2xvc2VfZ2FwYmFzZSwgc3Ryb2tlX2NvbG91ciA9IFwiaGFwcHlfYmlrZV9pbmRleFwiLCIsIiAgICAgICAgIHBhbGV0dGUgPSBcImluZmVybm9cIiwgc3Ryb2tlX3dpZHRoID0gMTAwLCBsYXllcl9pZCA9IFwiYmFzZVwiKSAlPiUiLCIgIGFkZF9zZihkYXRhID0gY2xvc2VfZ2FwaW5kZXgsIHN0cm9rZV9jb2xvdXIgPSBcImluZGV4XCIsIiwiICAgICAgICAgcGFsZXR0ZSA9IFwibWFnbWFcIiwgc3Ryb2tlX3dpZHRoID0gNTAsIGxheWVyX2lkID0gXCJpbmRleFwiKSAiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjpbIm1hcGRlY2soc3R5bGUgPSBtYXBkZWNrX3N0eWxlKFwiZGFya1wiKSwgem9vbSA9IDApICU+JSAiLCIgIGFkZF9zZihkYXRhID0gY2xvc2VfZ2FwYmFzZSwgc3Ryb2tlX2NvbG91ciA9IFwiaGFwcHlfYmlrZV9pbmRleFwiLCIsIiAgICAgICAgIHBhbGV0dGUgPSBcImhlYXRcIiwgc3Ryb2tlX3dpZHRoID0gMjAsIGxheWVyX2lkID0gXCJiYXNlXCIpICU+JSIsIiAgYWRkX3NmKGRhdGEgPSBjbG9zZV9nYXBpbmRleCwgc3Ryb2tlX2NvbG91ciA9IFwiaW5kZXhcIiwiLCIgICAgICAgICBwYWxldHRlID0gXCJ5bG9ycmRcIiwgc3Ryb2tlX3dpZHRoID0gMTAwLCBsYXllcl9pZCA9IFwiaW5kZXhcIikiXX0= -->
 <pre class="r"><code>mapdeck(style = mapdeck_style(&quot;dark&quot;), zoom = 0) %&gt;% 
   add_sf(data = close_gapbase, stroke_colour = &quot;happy_bike_index&quot;,
-         palette = &quot;inferno&quot;, stroke_width = 100, layer_id = &quot;base&quot;) %&gt;%
+         palette = &quot;heat&quot;, stroke_width = 20, layer_id = &quot;base&quot;) %&gt;%
   add_sf(data = close_gapindex, stroke_colour = &quot;index&quot;,
-         palette = &quot;magma&quot;, stroke_width = 50, layer_id = &quot;index&quot;) </code></pre>
+         palette = &quot;ylorrd&quot;, stroke_width = 100, layer_id = &quot;index&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1774,7 +1774,7 @@ load(file = &quot;outputs/final_full_index.RData&quot;)</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2xvc2UgdGhlIEdhcCAjNjogTG9jYWwgRGVtbyBvZiBGdWxsIFNwZWN0cnVtIGluIFJTdHVkaW8iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIEltcG9ydCBMYXllcnMKCmBgYHtyfQpsb2FkKGZpbGUgPSAib3V0cHV0cy9maW5hbF9mdWxsX2Jhc2UuUkRhdGEiKQpsb2FkKGZpbGUgPSAib3V0cHV0cy9maW5hbF9mdWxsX2luZGV4LlJEYXRhIikKYGBgCgpgYGB7ciBldmFsPUZBTFNFfQptYXBkZWNrKHN0eWxlID0gbWFwZGVja19zdHlsZSgiZGFyayIpLCB6b29tID0gMCkgJT4lIAogIGFkZF9zZihkYXRhID0gY2xvc2VfZ2FwYmFzZSwgc3Ryb2tlX2NvbG91ciA9ICJoYXBweV9iaWtlX2luZGV4IiwKICAgICAgICAgcGFsZXR0ZSA9ICJpbmZlcm5vIiwgc3Ryb2tlX3dpZHRoID0gMTAwLCBsYXllcl9pZCA9ICJiYXNlIikgJT4lCiAgYWRkX3NmKGRhdGEgPSBjbG9zZV9nYXBpbmRleCwgc3Ryb2tlX2NvbG91ciA9ICJpbmRleCIsCiAgICAgICAgIHBhbGV0dGUgPSAibWFnbWEiLCBzdHJva2Vfd2lkdGggPSA1MCwgbGF5ZXJfaWQgPSAiaW5kZXgiKSAKYGBgCgohW10oaW1nL3VuaGFwcHlfM193X2luZGV4X3ByZXZpZXcuanBnKQoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2xvc2UgdGhlIEdhcCAjNjogTG9jYWwgRGVtbyBvZiBGdWxsIFNwZWN0cnVtIGluIFJTdHVkaW8iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIEltcG9ydCBMYXllcnMKCmBgYHtyfQpsb2FkKGZpbGUgPSAib3V0cHV0cy9maW5hbF9mdWxsX2Jhc2UuUkRhdGEiKQpsb2FkKGZpbGUgPSAib3V0cHV0cy9maW5hbF9mdWxsX2luZGV4LlJEYXRhIikKYGBgCgpgYGB7ciBldmFsPUZBTFNFfQptYXBkZWNrKHN0eWxlID0gbWFwZGVja19zdHlsZSgiZGFyayIpLCB6b29tID0gMCkgJT4lIAogIGFkZF9zZihkYXRhID0gY2xvc2VfZ2FwYmFzZSwgc3Ryb2tlX2NvbG91ciA9ICJoYXBweV9iaWtlX2luZGV4IiwKICAgICAgICAgcGFsZXR0ZSA9ICJoZWF0Iiwgc3Ryb2tlX3dpZHRoID0gMjAsIGxheWVyX2lkID0gImJhc2UiKSAlPiUKICBhZGRfc2YoZGF0YSA9IGNsb3NlX2dhcGluZGV4LCBzdHJva2VfY29sb3VyID0gImluZGV4IiwKICAgICAgICAgcGFsZXR0ZSA9ICJ5bG9ycmQiLCBzdHJva2Vfd2lkdGggPSAxMDAsIGxheWVyX2lkID0gImluZGV4IikKYGBgCgohW10oaW1nL3VuaGFwcHlfM193X2luZGV4X3ByZXZpZXcuanBnKQoK</div>
 
 
 

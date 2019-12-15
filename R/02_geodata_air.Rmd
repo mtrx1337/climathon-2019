@@ -8,13 +8,17 @@ output: html_notebook
 ## Load and Subset to Germany
 
 ```{r}
-luftdaten <- jsonlite::fromJSON("geodata/data.24h.json", flatten = TRUE) # %>% unnest()
+luftdaten <- jsonlite::fromJSON("geodata/data.24h.json", flatten = TRUE)
+
 luftdaten_de <- luftdaten %>%
   filter(location.country == "DE") %>%
-  sf::st_as_sf(crs = 4326, coords = c('location.longitude', 'location.latitude'))
+  sf::st_as_sf(crs = 4326,
+               coords = c('location.longitude', 'location.latitude'))
 ```
 
 > TODO: Unnest details list-column
+
+> Proto: `luftdaten_berlin$sensordatavalues %>% map_df(., ~chuck(.))`
 
 ## Subset (st_within) to Berlin
 
@@ -23,7 +27,13 @@ luftdaten_berlin <- luftdaten_de %>%
   filter(lengths(st_within(., berlin_sf)) > 0)
 ```
 
+```{r eval=FALSE}
+mapview::mapview(luftdaten_berlin)
+```
+
 ## Calculate Buffer
+
+> TODO: count for intensity
 
 ```{r}
 luftdaten_berlin_buffer <- luftdaten_berlin %>% 
